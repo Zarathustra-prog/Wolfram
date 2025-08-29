@@ -1,0 +1,19 @@
+(* Perceptrón multicapa para compuerta XOR*)
+ClearAll[perceptron, xorMod];
+
+(* Perceptrón genérico *)
+perceptron[pesos_List, sesgo_, entradas_List] := Module[
+  {suma},
+  suma = pesos.entradas + sesgo;
+  If[suma >= 0, 1, 0]
+];
+
+(* Definición de compuertas internas *)
+nandMod[x1_, x2_] := perceptron[{-1, -1}, 1.2, {x1, x2}];
+orMod2[x1_, x2_]  := perceptron[{1, 1}, -0.6, {x1, x2}];
+andFinal[x1_, x2_] := perceptron[{1, 1}, -1.2, {x1, x2}];
+
+(* XOR como red multicapa *)
+xorMod[x1_, x2_] := andFinal[nandMod[x1, x2], orMod2[x1, x2]];
+
+Table[xorMod[x1, x2], {x1, 0, 1}, {x2, 0, 1}]

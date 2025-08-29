@@ -1,0 +1,12 @@
+(* Perceptrón para compuerta OR *)
+ClearAll[perceptronOR];
+
+perceptronOR[x1_, x2_] := Module[
+  {pesos, sesgo, suma},
+  pesos = {1, 1};
+  sesgo = -0.7;
+  suma = pesos.{x1, x2} + sesgo;
+  If[suma >= 0, 1, 0]
+];
+
+Table[perceptronOR[x1, x2], {x1, 0, 1}, {x2, 0, 1}]
